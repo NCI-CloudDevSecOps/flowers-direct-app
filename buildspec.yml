@@ -1,11 +1,13 @@
 version: 0.2
+
 env:
   secrets-manager:
     LOGIN: prod/sonar:28ed573b0b04cac30fcd9c94c37f6ee401827c5e
     HOST: prod/sonar:https://sonarcloud.io
     Organization: prod/sonar:NCI-CloudDevSecOps
     Project: prod/sonar:flowers-direct-app
-phases :
+
+phases:
   install:
     runtime-versions:
       python: 3.11
@@ -25,7 +27,7 @@ phases :
       - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.3.0.1492-linux.zip
       - unzip ./sonar-scanner-cli-3.3.0.1492-linux.zip
       - export PATH=$PATH:/sonar-scanner-3.3.0.1492-linux/bin/
- build:
+  build:
     commands:
       - mvn test     
       - mvn sonar:sonar -Dsonar.login=$LOGIN -Dsonar.host.url=$HOST -Dsonar.projectKey=$Project -Dsonar.organization=$Organization
