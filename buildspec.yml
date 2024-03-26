@@ -3,7 +3,7 @@ phases:
   install:
     runtime-versions:
       python: 3.11
-      java: openjdk8
+      java: corretto8
     commands:
       - pip install --upgrade pip
       # Install dependencies needed for running the static analysis
