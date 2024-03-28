@@ -1,12 +1,12 @@
 branch-defaults:
   default:
-    environment: x23219203-flowersdirect-app-env
+    environment: x23219203-flowersdirect--env
     group_suffix: null
 global:
-  application_name: x23219203-flowersdirect-app
+  application_name: x23219203-flowersdirect
   branch: null
   default_ec2_keyname: null
-  default_platform: Python 3.9
+  default_platform: Python 3.11
   default_region: eu-west-1
   include_git_submodules: true
   instance_profile: null
