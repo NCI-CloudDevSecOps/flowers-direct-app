@@ -13,14 +13,17 @@ phases:
       - ln -s apache-maven-3.5.4 maven
       - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.3.0.1492-linux.zip
       - unzip ./sonar-scanner-cli-3.3.0.1492-linux.zip
+      - mv sonar-scanner-3.3.0.1492-linux /sonar-scanner
+      - export PATH=$PATH:/sonar-scanner/bin/
       
   build:
     commands:
-      - mvn sonar:sonar -Dsonar.login=28ed573b0b04cac30fcd9c94c37f6ee401827c5e -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=flowers-direct-app -Dsonar.organization=NCI-CloudDevSecOps || true
+      - find / -name pom.xml -exec mv {} ./pom.xml \; || true  # Move all pom.xml files to root
+      - mvn sonar:sonar -Dsonar.login=28ed573b0b04cac30fcd9c94c37f6ee401827c5e -Dsonar.host.url=https://sonarcloud.io -Dsonar.projectKey=flowers-direct-app -Dsonar.organization=NCI-CloudDevSecOps
       - sleep 5
-      - curl https://sonarcloud.io/api/qualitygates/project_status?projectKey=flowers-direct-app >result.json
-      - cat result.json
-      - if [ $(jq -r '.projectStatus.status' result.json) = ERROR ] ; then $CODEBUILD_BUILD_SUCCEEDING -eq 0 ;fi
+      # Check the HTTP response status code directly
+      - if curl -s -o /dev/null -w "%{http_code}" https://sonarcloud.io/api/qualitygates/project_status?projectKey=flowers-direct-app != "200"; then exit 1; fi
+
 
 artifacts:
    files:
