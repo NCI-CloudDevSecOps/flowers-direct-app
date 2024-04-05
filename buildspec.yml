@@ -11,7 +11,7 @@ phases :
   pre_build:
     commands:
       - python --version
-      - pylint ./**/*.py --disable=all --enable=E || true
+      - pylint ./**/*.py --disable=all --enable=F,W || true
       #- pylint ./**/*.py || true
 
 artifacts:
