@@ -24,7 +24,6 @@ phases:
       # Check the HTTP response status code directly
       - if curl -s -o /dev/null -w "%{http_code}" https://sonarcloud.io/api/qualitygates/project_status?projectKey=flowers-direct-app != "200"; then exit 1; fi
 
-
 artifacts:
    files:
     - '**/*'
