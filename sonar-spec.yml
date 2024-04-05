@@ -26,7 +26,8 @@ phases:
   build:
     commands:
       - find / -name pom.xml -exec mv {} ./pom.xml \; || true  # Move all pom.xml files to root
-      - sonar-scanner -Dsonar.organization=$SONARCLOUD_ORG -Dsonar.projectKey=$PROJECTKEY -Dsonar.sources=src -Dsonar.host.url=$HOST -Dsonar.login=$SONARCLOUD_TOKEN
+      - mvn sonar:sonar -Dsonar.login=$SONARCLOUD_TOKEN -Dsonar.host.url=$HOST -Dsonar.projectKey=$PROJECTKEY -Dsonar.organization=$SONARCLOUD_ORG
+      #- sonar-scanner -Dsonar.organization=$SONARCLOUD_ORG -Dsonar.projectKey=$PROJECTKEY -Dsonar.sources=src -Dsonar.host.url=$HOST -Dsonar.login=$SONARCLOUD_TOKEN
       #- mvn sonar:sonar -Dsonar.login=28ed573b0b04cac30fcd9c94c37f6ee401827c5e -Dsonar.host.url=https://sonarcloud.io/ -Dsonar.projectKey=flowers-direct-app -Dsonar.organization=nci-clouddevsecops
       - sleep 5
       # Check the HTTP response status code directly
