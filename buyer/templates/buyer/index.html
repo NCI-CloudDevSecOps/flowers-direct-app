@@ -1,10 +1,17 @@
 {% extends 'buyer/base.html' %}
 
 {% block content %}
-<div class="container mb-5">
+<style type="text/css">
+.bgimg {
+    background-image: url("../media/flower_images/bg12.jpeg");
+    height: 850px;
+}
+</style>
+<div class="bgimg">
+    <div class="container mb-5">
     <div class="row justify-content-center mt-5">
-        <div class="col-md-8 col-sm-12 offset-md-1 p-4 text-center">
-            <h1>Online Flowers Delivery Service</h1>
+        <div class="col-md-8 col-sm-12 offset-md-1 p-4 text-center fw-bold">
+            <h1 class="fw-bolder">Online Flowers Delivery Service</h1>
         </div>
     </div>
     <div class="row justify-content-center mt-1">
@@ -14,4 +21,6 @@
         </div>
     </div>
 </div>
+</div>
+
 {% endblock content %}

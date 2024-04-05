@@ -16,11 +16,10 @@ class About(View):
 class Order(View):
     def get(self, request, *args, **kwargs):
         # get every item from each category
-        appetizers = FlowerItem.objects.filter(
-            category__name__contains='Appetizer')
-        entres = FlowerItem.objects.filter(category__name__contains='Entre')
-        desserts = FlowerItem.objects.filter(category__name__contains='Dessert')
-        drinks = FlowerItem.objects.filter(category__name__contains='Drink')
+        appetizers = FlowerItem.objects.filter(category__name__contains='Aster Flower')
+        entres = FlowerItem.objects.filter(category__name__contains='Tulips')
+        desserts = FlowerItem.objects.filter(category__name__contains='Delphiniums')
+        drinks = FlowerItem.objects.filter(category__name__contains='Rose')
 
         # pass into context
         context = {
@@ -110,3 +109,13 @@ class OrderConfirmation(View):
 class OrderPayConfirmation(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'buyer/order_payment_confirmation.html')
+        
+class Menu(View):
+    def get(self, request, *args, **kwargs):
+        menu_items = FlowerItem.objects.all()
+
+        context = {
+            'menu_items': menu_items
+        }
+
+        return render(request, 'buyer/menu.html', context)

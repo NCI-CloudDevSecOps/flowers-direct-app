@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from buyer.views import Index, About, Order, OrderConfirmation, OrderPayConfirmation
+from buyer.views import Index, About, Order, OrderConfirmation, OrderPayConfirmation, Menu
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,6 +26,7 @@ urlpatterns = [
     path('seller/', include('seller.urls')),
     path('about/', About.as_view(), name='about'),
     path('order/', Order.as_view(), name='order'),
+    path('menu/', Menu.as_view(), name='menu'),
     path('order-confirmation/<int:pk>', OrderConfirmation.as_view(),
          name='order-confirmation'),
     path('payment-confirmation/', OrderPayConfirmation.as_view(),

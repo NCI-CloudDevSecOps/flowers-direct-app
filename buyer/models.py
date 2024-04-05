@@ -29,9 +29,10 @@ class OrderModel(models.Model):
     street = models.CharField(max_length=50, blank=True)
     city = models.CharField(max_length=50, blank=True)
     state = models.CharField(max_length=15, blank=True)
-    eir_code = models.IntegerField(blank=True, null=True)
-    is_amount_paid = models.BooleanField(default=False)
+    eir_code = models.CharField(max_length=10, blank=True)
+    is_amount_paid = models.BooleanField(default=True)
     is_shipped = models.BooleanField(default=False)
+    is_order_cancelled = models.BooleanField(default=False)
 
     def __str__(self):
         return f'Order: {self.created_on.strftime("%b %d %I: %M %p")}'

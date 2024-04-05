@@ -42,12 +42,13 @@ class OrderDetails(LoginRequiredMixin, UserPassesTestMixin, View):
         order = OrderModel.objects.get(pk=pk)
         order.is_shipped = True
         order.save()
-
+        print(request)
         context = {
             'order': order
         }
 
         return render(request, 'seller/order-details.html', context)
+        
 
     def test_func(self):
         return self.request.user.groups.filter(name='Staff').exists()
