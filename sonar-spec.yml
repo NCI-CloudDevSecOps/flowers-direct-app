@@ -1,9 +1,10 @@
 version: 0.2
 env:
   secrets-manager:
-    SONARCLOUD_TOKEN: x23219203-sonar-secrets:SONAR_TOKEN
-    SONARCLOUD_ORG: x23219203-sonar-secrets:ORGANIZATION
-    PROJECTKEY: x23219203-sonar-secrets:PROJECT_KEY
+    SONARCLOUD_TOKEN: x23219203-sonar-secrets:sonartoken
+    SONARCLOUD_ORG: x23219203-sonar-secrets:Organization
+    PROJECTKEY: x23219203-sonar-secrets:Project
+    HOST: x23219203-sonar-secrets:HOST
     
 phases:
   install:
@@ -25,7 +26,7 @@ phases:
   build:
     commands:
       - find / -name pom.xml -exec mv {} ./pom.xml \; || true  # Move all pom.xml files to root
-      - mvn sonar:sonar -Dsonar.organization=$SONARCLOUD_ORG -Dsonar.projectKey=$PROJECTKEY -Dsonar.sources=src -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONARCLOUD_TOKEN
+      - mvn sonar:sonar -Dsonar.organization=$SONARCLOUD_ORG -Dsonar.projectKey=$PROJECTKEY -Dsonar.sources=src -Dsonar.host.url=$HOST -Dsonar.login=$SONARCLOUD_TOKEN
       #- mvn sonar:sonar -Dsonar.login=28ed573b0b04cac30fcd9c94c37f6ee401827c5e -Dsonar.host.url=https://sonarcloud.io/ -Dsonar.projectKey=flowers-direct-app -Dsonar.organization=nci-clouddevsecops
       - sleep 5
       # Check the HTTP response status code directly
