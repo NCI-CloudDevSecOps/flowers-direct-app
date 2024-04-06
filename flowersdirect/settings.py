@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'w4ze7pr8&e=l2em=e-dmhvvl!#i#^vx8jus#a0dpdjjfg#b+e%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 CSRF_TRUSTED_ORIGINS = ['https://5428f7a2bede4b29b6a85b623da9cae0.vfs.cloud9.eu-west-1.amazonaws.com','https://x23219203-flowers-direct-apps-env.eba-49asm7vc.eu-west-1.elasticbeanstalk.com']
 ALLOWED_HOSTS = ['x23219203-flowers-direct-apps-env.eba-49asm7vc.eu-west-1.elasticbeanstalk.com','5428f7a2bede4b29b6a85b623da9cae0.vfs.cloud9.eu-west-1.amazonaws.com','x23219203-flowers-direct-apps-env.eba-49asm7vc.eu-west-1.elasticbeanstalk.com']
 
@@ -147,7 +147,6 @@ USE_L10N = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 SITE_ID = 1
