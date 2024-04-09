@@ -1,19 +1,21 @@
-version: 0.2
+# Specifies the version of the build specification syntax being used.
+version: 0.2 
 phases :
   install:
     runtime-versions:
+      # Specifies the Python runtime version to be used during the build.
       python: 3.11
     commands:
       - pip install --upgrade pip
-      # Install dependencies needed for running the static analysis
+      # Install dependencies needed for running the  application and static analysis
       - pip install -r requirements.txt pylint
       
   pre_build:
     commands:
       - python --version
-      - pylint ./**/*.py --disable=all --enable=F,W || true
-      #- pylint ./**/*.py || true
-
+      # Runs pylint static code analysis on all Python files in the project directory and its subdirectories. The "|| true" ensures that the build continues even if pylint reports errors.
+      - pylint ./**/*.py || true
+# Specifies that all files generated during the build process should be included in the build artifacts.
 artifacts:
    files:
     - '**/*'

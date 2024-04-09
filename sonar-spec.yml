@@ -1,6 +1,7 @@
 version: 0.2
 env:
   secrets-manager:
+    # SonarCloud keys retrieved from AWS Secrets Manager.
     SONARCLOUD_TOKEN: x23219203-sonar-secrets:sonartoken
     SONARCLOUD_ORG: x23219203-sonar-secrets:Organization
     PROJECTKEY: x23219203-sonar-secrets:Project
@@ -25,7 +26,9 @@ phases:
       
   build:
     commands:
-      - find / -name pom.xml -exec mv {} ./pom.xml \; || true  # Move all pom.xml files to root
+      # Moves all pom.xml files found in the system to the root directory. Ignores errors if no pom.xml files are found.
+      - find / -name pom.xml -exec mv {} ./pom.xml \; || true  
+      # Executes Sonar analysis using Maven with provided SonarCloud parameters.
       - mvn sonar:sonar -Dsonar.login=$SONARCLOUD_TOKEN -Dsonar.host.url=$HOST -Dsonar.projectKey=$PROJECTKEY -Dsonar.organization=$SONARCLOUD_ORG
       - sleep 5
       # Check the HTTP response status code directly

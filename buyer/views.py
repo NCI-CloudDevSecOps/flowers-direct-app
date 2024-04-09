@@ -4,6 +4,7 @@ from .models import FlowerItem, Category, OrderModel
 
 
 class Index(View):
+    # Renders the index.html template for the homepage.
     def get(self, request, *args, **kwargs):
         return render(request, 'buyer/index.html')
 
@@ -15,7 +16,7 @@ class About(View):
 
 class Order(View):
     def get(self, request, *args, **kwargs):
-        # get every item from each category
+        # Retrieves items for each category and passes them into the context.
         appetizers = FlowerItem.objects.filter(category__name__contains='Aster Flower')
         entres = FlowerItem.objects.filter(category__name__contains='Tulips')
         desserts = FlowerItem.objects.filter(category__name__contains='Delphiniums')
@@ -45,7 +46,7 @@ class Order(View):
         }
 
         items = request.POST.getlist('items[]')
-
+        # Retrieves selected items from the POST request and constructs order items.
         for item in items:
             menu_item = FlowerItem.objects.get(pk__contains=int(item))
             item_data = {
@@ -95,6 +96,7 @@ class Order(View):
         return redirect('order-confirmation', pk=order.pk)
         
 class OrderConfirmation(View):
+    # Constructs the context for rendering the order confirmation page.
     def get(self, request, pk, *args, **kwargs):
         order = OrderModel.objects.get(pk=pk)
 
@@ -111,6 +113,7 @@ class OrderPayConfirmation(View):
         return render(request, 'buyer/order_payment_confirmation.html')
         
 class Menu(View):
+    # Retrieves all flowers items.
     def get(self, request, *args, **kwargs):
         menu_items = FlowerItem.objects.all()
 

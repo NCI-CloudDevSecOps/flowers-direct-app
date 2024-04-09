@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.utils.timezone import datetime
 from buyer.models import OrderModel
 
-# Create your views here.
+# Get the dashboard details
 class SellerDashboard(LoginRequiredMixin, UserPassesTestMixin, View):
     def get(self, request, *args, **kwargs):
         # get the current date
@@ -30,6 +30,7 @@ class SellerDashboard(LoginRequiredMixin, UserPassesTestMixin, View):
         return self.request.user.groups.filter(name='Staff').exists()
 
 class OrderDetails(LoginRequiredMixin, UserPassesTestMixin, View):
+    # Get the order details \
     def get(self, request, pk, *args, **kwargs):
         order = OrderModel.objects.get(pk=pk)
         context = {
@@ -37,7 +38,7 @@ class OrderDetails(LoginRequiredMixin, UserPassesTestMixin, View):
         }
 
         return render(request, 'seller/order-details.html', context)
-
+    # GUpdate the order
     def post(self, request, pk, *args, **kwargs):
         order = OrderModel.objects.get(pk=pk)
         order.is_shipped = True
