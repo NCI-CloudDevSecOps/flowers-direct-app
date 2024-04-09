@@ -38,7 +38,9 @@ The application named Flowers Direct is an attempt to ease flower delivery proce
 - **sonar-spec.yml**: Sonar review configuration file.
 
 ### Additional Notes
-
+Seller login creds : 
+username:seller
+Password: Password@1
 
 ---
 
